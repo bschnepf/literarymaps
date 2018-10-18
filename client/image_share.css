@@ -1,0 +1,99 @@
+/* CSS declarations go here */
+
+
+.thumbnail {
+	min-height:160px;
+	max-height:160px;
+	
+	}
+.logo {
+    min-height: 7%;
+    max-height: 7%;
+    height: 30%;
+    width: 30%; 
+    }
+
+.nav-logo {
+    height: 40%;
+    width: 40%;
+    }
+
+.nav-logo-uni {
+    height: 75%;
+    width: 75%;
+    }
+  
+.document-img{
+    min-height: 40%;
+    max-height: 40%;
+
+}	
+.thumbnail-img{
+    max-height:300px;
+}
+
+.map-container {
+  width: 800px;
+  max-width: 100%;
+  height: 500px;
+}
+
+ .CodeMirror {
+   border: 8px solid #eee;
+   min-height: 600px;
+   font-family: "Times New Roman", Times, serif;
+   font-size: 1.875em;
+} 
+
+th {
+    background-color: #616f7d;
+    color: white;
+}
+
+body{
+    padding-top:60px  ;
+    }
+        
+.single-img{
+    max-width:100%;
+}
+
+.japaneseText {
+
+-ms-writing-mode: tb-rl; /* old syntax. IE */
+-webkit-writing-mode: vertical-rl;
+-moz-writing-mode: vertical-rl;
+-ms-writing-mode: vertical-rl;
+writing-mode: vertical-rl; /* new syntax */
+			
+-webkit-text-orientation: upright;
+-moz-text-orientation: upright;
+-ms-text-orientation: upright;
+text-orientation: upright;
+}
+
+.top-margin {
+    margin-top: 50px;
+ }
+
+/* .btn-primary {
+    color: red;
+} */
+
+#viewer_iframe{
+	border:4px solid gray;
+	resize:both;
+	width:100%;
+}
+
+#visjs{
+	height:500px;
+}
+.vis-label{
+	fill-opacity:0;
+}
+
+.vis-label:hover{
+	fill-opacity:1;
+}
+

@@ -1,0 +1,7 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL":"mongodb://litgeo:litmaps@ds021979.mlab.com:21979/litgeo"
+    }
+  }
+}

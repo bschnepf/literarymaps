@@ -1,0 +1,55 @@
+
+  <head>
+    <!-- use the head section to define meta data and load css and js files -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>zenbu's collaborative platform</title>
+
+  </head>
+  <body>
+
+</body>
+
+<!-- Here are our Templates -->
+<template name="spotMeta2">
+    <div class="container">
+    
+          <!-- page tile -->
+      <div class="page-header">
+        <h1>Add spot: </h1>
+        <h4> <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> 
+     {{title}} / {{jtitle}}</h4>
+  <br/>
+      </div>    
+ 
+       <br/><br/><br/>  
+       <!-- start breadcrumb -->
+      <ol class="breadcrumb">
+        <li><a href="image_share.html"> documents </a></li>
+        <li><a href="image_share.html"> your document </a></li>
+        <li><a href="image_share.html"> add spot </a></li>
+      </ol>
+       <!-- end breadcrumb -->
+
+ 
+      
+
+      <!-- A navigation menu that selects different views -->
+      <ul class="nav nav-tabs">
+            <li role=""><a href="#" id="albums-tab" >Your document</a></li>
+            <li role="" class="active"><a href="#" id="add-spot" >add spot</a></li>
+            <li role=""><a href="#" id="slideshow-tab" >edit spot</a></li>
+            <li role=""><a href="#" id="slideshow-tab" >about spot</a></li>
+            <li role=""><a href="#" id="slideshow-tab" >about author</a></li>
+          </ul>
+          
+      <br/><br/>
+ 
+      <!-- the content section is empty as we will fill it 
+            via javascript and templates -->
+      <div id="content"  class="container-fluid"  role="main">
+      </div>
+  </div> <!-- / container -->
+  </template>

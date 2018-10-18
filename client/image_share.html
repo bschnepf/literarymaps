@@ -1,0 +1,1029 @@
+<head>
+  <title>literature_share</title>
+<!--  <script src="vis.js"></script>  -->
+</head>
+
+<body>
+
+</body>
+
+<template name="ApplicationLayout">
+   {{> yield "navbar"}}
+   {{> yield "main"}}
+</template>
+
+
+
+
+<template name="welcome">
+  <div class="container">
+    <div class="jumbotron">
+      <h2 align="center">Digital Literary Maps</h2>
+      <h2 align="center" style="font-family:serif">デジタル文学地図</h2><br/><br/>
+        <p align="center">
+      <a href="/main2" class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white">WELCOME</a>
+      </p><br/>
+       <p align="center">
+      <img class ="logo" src="schriftzug_uni_heidelberg.gif"/>  
+      </p>
+       <p align="center">
+<!--      <img  class ="logo" src="image7.png"/>   -->
+       </p>
+    </div>
+  </div> 
+</template>
+
+<template name="main2">
+   <div class="container">
+   <div class="jumbotron">
+      <h2 align="center">Digital Literary Maps</h2>
+      <h2 align="center" style="font-family:serif"> デジタル文学地図</h2><br/><br/>
+  
+      <p align="center">
+      Log in and choose your document: <br/>
+      <a href="/images" class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white">Literary Diaries</a>
+      <a href="/images" class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white; font-family:serif" >資料</a></p>
+      <p align="center">
+      Log in and choose your map: <br/>
+      <a href="/images" class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white">Literary Maps</a>
+      <a href="/images" class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white; font-family:serif">文学地図</a></p>
+      <p align="center">
+      Log in and choose your document group: <br/>
+      <a href="/main_user_page" class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white">User groups</a>
+      <a href="/main_user_page" class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white; font-family:serif">ユーザグループ</a></p>
+      <p align="center"><br/>
+      <img class ="logo" src="schriftzug_uni_heidelberg.gif"/>  
+      </p>
+   
+   
+    </div>
+   </div>
+</template>
+
+
+
+
+
+<template name="navbar">
+    <nav class="navbar navbar-default navbar-fixed-top">
+     <div class="container-fluid">
+     <!-- start collapsed navbar -->
+      <div class="navbar-header">
+       <button type="button" class="navbar-toggle collapsed" 
+                     data-toggle="collapse" data-target="#main_navbar"
+                     aria-expanded="false">open!</button>
+      </div>
+     <!-- / collapsed navbar -->
+     <!-- start un-collapsed navbar -->
+     <div class="collapse navbar-collapse" id="main_navbar">
+      <ul class="nav navbar-nav">
+      <li> <a class="navbar-brand" href="/main2">
+      Digital Literary Maps | 
+           </a></li>
+             <li> <a class="navbar-brand" href="/main2" style="font-family:serif">
+       デジタル文学地図 
+           </a></li>
+         <li> <a href="http://www.uni-heidelberg.de"> 
+               <img align="left" class ="nav-logo-uni" src="schriftzug_uni_heidelberg.gif"/>  
+             </a> </li>  
+       <li> <a href="http://www.marsilius-kolleg.uni-heidelberg.de"> 
+               <img class ="nav-logo" src="image7.png"/>  
+             </a> </li>   
+<!--         <li> <a href="http://www.zo.uni-heidelberg.de/japanologie/"> 
+               <img  class ="nav-logo" src="logo_jp_neu.png"/>  </a> </li>    -->
+<!--         <li> <a href="about.html">About this project</a> </li>    -->
+      </ul>
+
+    <p class="navbar-text "> 
+	   {{> loginButtons}}
+	</p>
+	</div> <!-- / un-collapsed navbar -->
+ 
+    </div>
+</nav>
+</template>
+
+
+<template name="main_user_page">
+	{{> available_user_list}}
+</template>
+
+
+<template name="available_user_list">
+<div class="container">
+	<h5>Log in and select a document:</h5>
+	<div class="row">
+	{{#each users}}
+	{{> available_user}}
+	{{/each}}
+</div>
+</div>
+</template>
+
+<template name="available_user">
+	<div class="col-md-12">
+	<!--	<div class="user_avatar">  -->
+			{{#if isMyUser _id}}  
+			 User / ユーザー:  
+             <span class="label label-default">{{getUsername _id}}  </span> 
+		
+<!--				<img src="/{{profile.avatar}}" class="avatar_img">		-->	
+			
+		   {{else}}  
+			<div>  
+			<a href="/docsession/{{_id}}">  
+				{{getUsername _id}} (NOT YOU)
+				<br/>
+<!--				<img src="/{{profile.avatar}}" class="avatar_img">  -->
+			</a>  
+			</div>
+			{{/if}}  
+			<br/><br/>
+			  {{#each images}}
+  <div class="col-xs-12 col-md-12" id={{_id}}>
+  	<div class="thumbnail">
+
+  <!--	 	<a href="/images/{{_id}}"><img class="js-image" src="{{img_src}}" 
+  		alt="{{img_alt}}"/> </a> -->
+  		
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title / 題名</th>
+        <th>Genre / ジャンル</th>
+        <th>Author / 著者</th>
+        <th>Date of Origin / 成立</th>
+        <th>URL / URLの説明</th>
+<!--        <th>User / ユーザー</th> -->
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{title}}<br/>{{jtitle}}</td>
+        <td>{{category}}<br/>{{jcategory}}</td>
+        <td>{{author}}<br/>{{jauthor}}</td>
+        <td>{{create_time}}<br/>{{jcreate_time}}</td>
+         <td><a href="http://{{img_src}}">{{img_alt}}</a></td>
+<!--        <td><a href="#" class="js-set-image-filter"> {{getUser createdBy}}</a> </td> -->
+      </tr>
+  	 </tbody>
+  </table> 	
+  		
+     <!--	<button class="js-show-single-image btn btn-warning">this one</button> -->
+      <!--  	<a href="/image/{{_id}}" class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white">select</a>  -->
+         <span class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white">select</span> 
+         
+     	</div>
+<!--     </div>   -->
+    </div> <!-- / col -->
+      {{/each}}
+ 	
+			
+			
+			
+			
+			
+			  
+	<!--	</div>    -->
+	</div>
+</template>
+
+
+<template name="user_page">
+	<h3>Choose your documents!</h3>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well well-lg">
+		    <h5><mark><em> Welcome!   
+<!--			 <img src="/{{getAvatar whatsUser1Id}}" class="avatar_chat_img">	-->		
+			 {{getUsername whatsUser1Id}}
+			and  
+<!--			 <img src="/{{getAvatar whatsUser2Id}}" class="avatar_chat_img">	-->	
+			 {{getUsername whatsUser2Id}} !</em></mark></h5><br/> 
+			
+			{{#each messages}}
+			{{> docsession_message}}
+			{{/each}}
+			</div>	
+		</div>
+	</div>
+	    <div class="row">
+		<div class="col-md-12">
+			<form class="js-send-user">
+			<input class="input" type="text" name="user" placeholder="type a message here...">
+			<button class="btn btn-warning">send</button>
+		</form>
+		</div>
+	</div>
+</template>
+
+
+<template name="docsession_message">
+<!--    <img src="/{{getAvatar owner}}" class="avatar_user_img">   -->
+     {{text}}
+	<br/>
+</template>
+
+
+<template name="image">
+ <div class="container">
+       <br/><br/><br/>  
+       <!-- start breadcrumb -->
+      <ol class="breadcrumb">
+         <li><a href="/images"> All documents </a></li>
+         <li><a href="#"> Your document </a></li>
+         {{#if activeTab 'searchSpotTab'}}
+           <li><a href="#"> Search Spot </a></li>
+         {{/if}}
+         {{#if activeTab 'addSpotTab'}}
+           <li><a href="#"> Add Spot </a></li>
+         {{/if}}
+         {{#if activeTab 'editSpotTab'}}
+           <li><a href="#"> Edit Spot </a></li>
+         {{/if}}
+          {{#if activeTab 'expandSpotTab'}}
+           <li><a href="#"> Expand Spot </a></li>
+         {{/if}}
+         
+      </ol>
+       <!-- end breadcrumb -->
+
+ 
+  <h4> <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> 
+        &nbsp; :  &nbsp; {{title}} / {{jtitle}}</h4>
+  <br/>
+
+
+
+
+           <!-- A navigation menu that selects different views -->
+      <ul class="nav nav-pills">
+            <li role="" class="active"><a href="#" id="documentTab" data-toggle='tab'>
+                  <span class="glyphicon glyphicon-folder-open"></span> &nbsp; document</a></li>
+             <li role=""><a href="#" id="searchSpotTab" data-toggle='tab' >
+                   <span class="glyphicon glyphicon-search"></span> &nbsp; spot</a></li>      
+            <li role=""><a href="#" id="addSpotTab" data-toggle='tab' >
+                   <span class="glyphicon glyphicon-plus"></span> &nbsp; spot</a></li>
+            <li role=""><a href="#" id="editSpotTab" data-toggle='tab' >
+                   <span class="glyphicon glyphicon-pencil"></span> &nbsp; spot</a></li>
+            <li role=""><a href="#" id="expandSpotTab" data-toggle='tab'>
+                   <span class="glyphicon glyphicon-star"></span> &nbsp; spot</a></li>
+            <li role=""><a href="#" id="author-tab" >
+                   <span class="glyphicon glyphicon-user"></span> &nbsp; author</a></li>
+            <li role=""><a href="#" id="translator-tab" >
+                   <span class="glyphicon glyphicon-user"></span> &nbsp; translator</a></li>
+            <li role=""><a href="#" id="publication-tab" >
+                   <span class="glyphicon glyphicon-th-list"></span> &nbsp; publications</a></li>
+          </ul>
+ 
+      <br/>
+
+
+ <div class="row">
+ 
+         {{#if activeTab 'documentTab'}}
+
+         <div class="container top-margin">
+
+        <div class="row">
+          <div class="col-md-12">
+            {{> docMeta}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <br/>
+            {{> editingUsers}}
+          </div>
+        </div>
+
+       <div class="row">
+         <div class="col-md-12">
+         <ul class="nav navbar-nav">
+            <li>
+              <a href="#" class="js-add-doc">
+               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+               new document 
+              </a> 
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" 
+                      data-toggle="dropdown" 
+                      role="button" 
+                      aria-haspopup="true" 
+                      aria-expanded="false">
+                      Documents 
+              <span class="caret"></span></a>
+          
+             <ul class="dropdown-menu">
+                {{#each documents}}
+  <!--              <li><a href="/documents/{{_id}}" class = "js-load-doc">{{title}}</a></li>   -->
+                       <li><a href="" class = "js-load-doc js-load-image-id">{{title}}</a></li>
+                {{/each}}
+             </ul>
+            </li>
+          </ul>
+          </div>
+        </div> 
+           
+   <div class="row">
+          <div class="col-md-12">
+             {{> editor}}
+          </div>  
+       </div> 
+  
+
+     <div class="row">
+          <div class = "col-md-6">
+             <br/>
+          <h4> Document comments: </h4>
+            {{> commentList}}
+          </div> 
+
+          <div class = "col-md-6">
+             <br/>
+            {{> insertCommentForm}}
+          </div>
+     </div>  
+   
+</div>
+         {{/if}}
+
+         {{#if activeTab 'searchSpotTab'}} 
+            {{> spot_add_form}}
+         <div class="row">    
+            <div class="col-md-6">
+             <br/>
+              {{> mapSearchSpot}} <br/>
+           </div>
+            <div class="col-md-6">
+              {{> spotSearchList}} <br/>
+           </div>
+         </div>
+         {{/if}}
+
+         {{#if activeTab 'addSpotTab'}}
+         
+     <div class="row">   
+            <div class="col-md-6">
+            <br/>
+             {{> map}} <br/>
+              <br/>
+           </div>
+           <div class="col-md-6">
+              {{> drawingTool}} <br/>
+           </div>
+     </div>
+     <div class="row">
+           <div class="col-md-6">
+          <h3>  <span class="glyphicon glyphicon-road"></span> Travel Stations / 旅行日程: </h3>
+             {{> spotList}}  
+           </div>
+           <div class="col-md-6">
+             {{> insertSpotForm}}
+           </div>
+     </div>  
+
+  
+         {{/if}}
+         
+         
+         {{#if activeTab 'editSpotTab'}}
+         <div class = "row">
+            <div class = "col-md-8">
+             <br/>
+                {{> spotMeta}}
+            </div>
+         </div>
+         {{/if}}
+         
+         {{#if activeTab 'expandSpotTab'}}
+         <div class = "row">
+            <div class = "col-md-6">
+            <br/>
+               {{> expandSpotMeta}}
+            </div>
+            <div class = "col-md-6">
+            <br/>
+            <h3>  <span class="glyphicon glyphicon-list-alt"></span> Additional Information: </h3>
+               {{> expandSpotList}}
+            </div>
+         </div>
+         {{/if}}
+    
+    
+
+ 
+  <!-- <img class="thumbnail" src="{{img_src}}"/>
+    <label for="url">Site address</label> -->
+<!--	<input type="text" class="form-control" id="url" placeholder="http://www.openstreetmap.org/#map=6/36.191/136.714">
+	<a href="http://www.openstreetmap.org/#map=6/36.191/136.714"> </a> -->
+
+
+<!--     <div class="col-md-6">
+        {{> viewer}}
+      </div> --> 
+
+<!-- maybe with main station-viz template !!! -->
+<!-- 
+<div class="row">
+     <div class = "col-md-3">
+       {{> station_viz_controls}}
+       {{> station_feature_list}} 
+     </div>
+     <div class = "col-md-3">
+       {{> station_vizjs}}
+     </div>  -->
+
+     
+<!-- processing !!! 
+	<div class="col-md-3">
+      <canvas id="pjs3"> </canvas>           
+ 	</div>    
+ -->	
+ 
+   
+<!--	<div class="col-md-3">   
+     <h3> Travel Stations / 旅行日程: </h3>
+    <ul class="cbp_tmtimeline">
+	<li>
+		<time class="cbp_tmtime" datetime="1889-04-10"><span>4/10/13 step1</span> <span> </span></time>
+		<div class="cbp_tmicon cbp_tmicon-phone"></div>
+		<div class="cbp_tmlabel">
+			place one
+			<p>next up</p>
+		</div>
+	</li>
+	<li>
+		<time class="cbp_tmtime" datetime="1889-04-11T12:04"><span>4/11/13 part II</span> <span></span></time>
+		<div class="cbp_tmicon cbp_tmicon-screen"></div>
+		<div class="cbp_tmlabel">
+             place two
+			<p>next up</p>
+		</div>
+	</li>
+	<li>
+		<time class="cbp_tmtime" datetime="1889-04-13 05:36"><span>4/13/13 part III</span> <span></span></time>
+		<div class="cbp_tmicon cbp_tmicon-mail"></div>
+		<div class="cbp_tmlabel">
+			place three
+			<p>next up</p>
+		</div>
+	</li>
+
+     </ul>
+    </div> -->
+    
+</div> 
+</div>  
+</template>
+
+
+<template name="editor">
+<!--      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
+      DocId: {{docid}} /   {{> date_display}}     -->
+      {{#if docid}}
+     <br/>
+     {{> sharejsCM docid=docid onRender=config id="editor" mode="html"}}
+     {{/if}}
+</template>
+
+<!-- <template name="viewer">  
+  <iframe id="viewer_iframe"
+    src="http://www.esa.int/spaceinvideos/content/view/embedjw/463129" width="640" height="360" frameborder="0"> 
+  </iframe>
+</template> -->
+
+<!-- <template name="viewer">  
+  <iframe id="viewer_iframe">
+  </iframe>
+</template>  -->  
+
+<template name="docMeta"> 
+  {{#with document}}
+  <span class = "h2" area-hidden ="true"> 
+   {{> editableText collection="documents" field="title"}}</span> 
+    {{#if canEdit}}  
+    <div class="checkbox">
+    <label>
+      <input type="checkbox" class = "js-tog-private"> Private document
+    </label>
+  </div>   
+  {{/if}} 
+  {{/with}}
+</template>
+
+
+
+
+<template name="editingUsers"> 
+  Editors: <br/>
+  {{#each users}}
+  <span class="label label-default"> {{lastname}}</span> 
+  {{lastEdit}} 
+<p>
+<!--  <span style="font-size:12px;border:1px solid #00f;vertical-align:text-top;">{{firstname}} </span> -->
+<!--   <span class="label label-success japaneseText">{{firstname}} </span>  -->
+ <!--  <span class="label label-success" style="vertical-align:top">{{firstname}} </span>  -->
+</p>
+  {{/each}}
+</template>
+
+<template name="station_viz_controls">
+   <form>
+        Single numeric feature:
+        <br/>
+        <select class="js-select-single-feature">
+        
+          {{#each get_feature_names "single"}}
+          <option value="{{name}}">{{name}} </option>
+          {{/each}}
+        </select>
+        <button class="btn js-show-blobs">blobs</button>
+        <button class="btn js-show-timeline">timeline</button> 
+    </form>
+</template>
+
+<template name="station_feature_list">
+    <ul>
+      {{#each get_all_feature_values}}
+         <li> {{author}} - {{title}} : {{value}} </li>
+      {{/each}} 
+    </ul>
+</template>  
+         
+<template name="station_vizjs">
+    <div id="visjs"></div>
+</template> 
+
+<template name="image_add_form">
+<div class="modal fade" id="image_add_form">
+   <div class="modal-dialog">
+       <div class="modal-content">
+          <div class="modal-header">
+             <div class="modal-title">
+                <h5> Add New Document </h5>
+               </div>
+             </div>  
+             
+             <div class="modal-body">
+               <form class="js-add-image">
+                 <input type="text" name="title"/>  Title 
+                 <br/>
+                 <input type="text" name="jtitle"/> 題名
+                 <br/>
+                 <input type="text" name="category"/>  Genre (tale / diary / travel diary / poetry anthology)
+                 <br/>
+                 <input type="text" name="jcategory"/> ジャンル (物語 / 日記 / 旅日記 / 詩歌集) 
+                 <br/>
+                 <input type="text" name="author"/> Author
+                 <br/>
+                 <input type="text" name="jauthor"/> 著者
+                 <br/>
+                 <input type="text" name="create_time"/>  Date of Origin
+                 <br/>
+                 <input type="text" name="jcreate_time"/> 成立
+                 <br/>
+                 <input type="text" name="img_src"/>  URL
+                 <br/>
+                 <input type="text" name="img_alt"/> description URL
+                 <br/> <br/>
+                 <button class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white">save</button>
+              </form>
+               </div>
+             <div class="modal-footer">
+               <button class="btn btn-warning" data-dismiss="modal">cancel</button>
+          
+               </div>       
+          </div>      
+   </div>
+</div>
+
+</template>
+
+
+<template name="images">
+   <div class = "container">
+       <br/><br/><br/>  
+       <!-- start breadcrumb -->
+      <ol class="breadcrumb">
+         <li><a href="/images"> All Documents </a></li>
+         {{#if activeTab0 'allAuthorsTab'}}
+           <li><a href="#"> All Authors </a></li>
+         {{/if}}
+          {{#if activeTab0 'allTranslatorsTab'}}
+           <li><a href="#"> All Translators </a></li>
+         {{/if}}
+          {{#if activeTab0 'allPublicationsTab'}}
+           <li><a href="#"> All Publications </a></li>
+         {{/if}}
+      </ol>
+       <!-- end breadcrumb -->
+
+      <!-- A navigation menu that selects different views -->
+      <ul class="nav nav-pills">
+            <li role="" class="active"><a href="#" id="allLiteratureTab" data-toggle='tab'>
+                  <span class="glyphicon glyphicon-folder-open"></span> all documents</a></li>
+            <li role=""><a href="#" id="addLiteratureTab" data-toggle='tab' >
+                   <span class="glyphicon glyphicon-plus"></span> add document</a></li>
+            <li role=""><a href="#" id="allAuthorsTab" data-toggle='tab' >
+                   <span class="glyphicon glyphicon-user"></span> all authors</a></li>
+            <li role=""><a href="#" id="allTranslatorsTab" data-toggle='tab'>
+                   <span class="glyphicon glyphicon-user"></span> all translators</a></li>
+            <li role=""><a href="#" id="allPublicationsTab" data-toggle='tab' >
+                   <span class="glyphicon glyphicon-th-list"></span> all publications</a></li>
+       </ul>
+ 
+      <br/><br/>
+
+     <div class="navbar-form">
+         <input id="searchbox" type="text" class="form-control" placeholder="Search...">
+        {{#if currentUser}}
+         <br/><br/> User / ユーザー:  
+             <span class="label label-default">{{accountname}}  </span>
+        {{/if}}
+     </div>
+
+   </div>
+    {{#if currentUser}}
+      {{#if activeTab0 'addLiteratureTab'}}
+ <!--       <button class="btn btn-success js-show-image-form" >add something</button> -->
+        <div>
+           {{> image_add_form}}
+        </div>
+      {{/if}}
+    {{/if}}
+
+  <div class="container js-container">
+
+     <h3>
+    {{#if filtering_images}}
+      Documents by   <span class="label label-default"> {{getFilterUser}} </span>.
+       <a href="#" class="js-unset-image-filter">Back to all.</a>
+    {{/if}}
+     </h3>
+     	
+      <h3>
+    {{#if filtering_authors}}
+      Documents by   <span class="label label-default"> {{getFilterAuthor}} </span>.
+       <a href="#" class="js-unset-author-filter">Back to all.</a>
+    {{/if}}
+     </h3>
+     	
+  <h3>
+    {{#if filtering_jauthors}}
+      Documents by   <span class="label label-default"> {{getFilterjAuthor}} </span>.
+       <a href="#" class="js-unset-jauthor-filter">Back to all.</a>
+    {{/if}}
+     </h3>
+
+  <h3>
+    {{#if filtering_usergroup}}
+      Documents by   <span class="label label-default"> {{getFilterjAuthor}} </span>.
+       <a href="#" class="js-unset-jauthor-filter">Back to all.</a>
+    {{/if}}
+     </h3>
+
+ <div class="row">   
+  
+  {{#each images}}
+  <div class="col-xs-12 col-md-12" id={{_id}}>
+  	<div class="thumbnail">
+
+  <!--	 	<a href="/images/{{_id}}"><img class="js-image" src="{{img_src}}" 
+  		alt="{{img_alt}}"/> </a> -->
+  		
+  <table class="table">
+      <thead>
+      <tr>
+        <th>Title / 題名</th>
+        <th>Genre / ジャンル</th>
+        <th>Author / 著者</th>
+        <th>Date of Origin / 成立</th>
+        <th>URL / URLの説明</th>
+<!--        <th>User / ユーザー</th> -->
+        <th> </th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <tr>
+        <td>{{title}}<br/>{{jtitle}}</td>
+        <td>{{category}}<br/>{{jcategory}}</td>
+        <td><a href="#" class="js-set-author-filter">{{author}}</a><br/><a href="#" class="js-set-jauthor-filter">{{jauthor}}</a></td>
+        <td>{{create_time}}<br/>{{jcreate_time}}</td>
+         <td><a href="http://{{img_src}}">{{img_alt}}</a></td>
+<!--        <td><a href="#" class="js-set-image-filter"> {{getUser createdBy}}</a> </td> -->
+      </tr>
+  	 </tbody>
+  </table> 	
+  		
+  		
+  		
+  			
+ <!-- 		<div class="caption">
+  		    
+        	<h3>Rating: {{rating}}</h3>  
+            <h3>Title: </h3>
+            <p>Author: </p>
+            <p>Translation: </p>
+            <p>Further files: </p>
+        	<p>{{img_alt}}</p>
+        	<p>User: 
+        	<a href="#" class="js-set-image-filter"> {{getUser createdBy}}</a> </p> -->
+<!--         	<p>
+       	  {{> starsRating mutable=true class="js-rate-image"
+        	      id=_id}}
+        	</p>  -->
+        	
+    <!--	<button class="js-show-single-image btn btn-warning">this one</button> -->
+        	<a href="/image/{{_id}}" class="js-set-image-id btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white">select</a>
+        	
+  
+        	<button class="js-del-image btn-sm btn-warning"> <span class="glyphicon glyphicon-trash"></span></button>
+   
+     	</div>
+<!--     </div>   -->
+    </div> <!-- / col -->
+  {{/each}}
+</div> <!-- / row -->
+</div> <!-- end container -->
+
+</template>
+
+<template name="date_display">
+      {{current_date}} / {{myVar}} 
+</template>
+
+<template name="commentList">
+      {{#each comments}}
+     <ul>
+      <li>{{title}}
+         <p>{{body}}   </p>
+      </li>
+   </ul>
+   {{/each}}
+</template>
+
+<template name="spotList">
+      {{#each spots}}
+     <ul>
+      <li><h5>{{travelstation}} / {{jap_travelstation}} </h5>
+         <p>Date: {{date_format travel_date}}  </p>   
+      </li>
+   </ul>
+   {{/each}}
+</template>
+
+
+
+<template name="insertCommentForm2">
+   {{> quickForm collection="Comments" id="insertCommentForm" type="method" 
+       meteormethod="addComment"}}
+</template>
+
+
+<template name="insertCommentForm">
+  {{#autoForm collection="Comments" id="insertCommentForm" type="method"
+         meteormethod = "addComment"}}
+      <fieldset>
+         <legend>Comment</legend>
+         {{> afQuickField name='title'}}   
+         {{> afQuickField name='body' rows=6 value=""}}
+         {{> afQuickField name='docid' value=docid type="hidden"}} 
+         {{> afQuickField name='owner' value=123 type="hidden"}}
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}   
+<!--  {{ > quickForm collection="Comments" id = "insertCommentForm"
+            type="method" meteormethod = "addComment"}}  -->
+</template>
+
+<template name="insertWallnerForm2">
+  {{> quickForm collection="Wallners" id = "insertWallnerForm"
+            type="method" meteormethod = "addWallner"}} 
+</template>
+
+<template name="spotMeta">
+
+    <div class="dropdown">
+          <a href="#" class="dropdown-toggle" 
+                      data-toggle="dropdown" 
+                      role="button" 
+                      aria-haspopup="true" 
+                      aria-expanded="false">
+                     Choose Spot
+            <span class="caret"></span></a>
+          
+          <ul class="dropdown-menu">
+             {{#each spots}}
+            <li><a href="#" class="js-load-spot">{{travelstation}}</a></li>
+             {{/each}}
+          </ul>
+        </div>
+     {{#with spot}}   
+     <br/> <br/>
+<!--   {{> quickForm collection="Spots" doc=this id="spotMeta" value="update"}} -->
+       {{#autoForm collection="Spots" id="spotMeta" doc=this type="method-update"  
+             meteormethod = "updateSpot" singleMethodArgument=false}}
+    
+     <fieldset>
+         <legend> <span class="glyphicon glyphicon-pencil"></span> Edit Spot:</legend>
+         {{> afQuickField name='travelstation' rows=1 value=this.travelstation}}
+         {{> afQuickField name='jap_travelstation' rows=1 value=this.jap_travelstation}}  
+         {{> afQuickField name='rom_travelstation' rows=1 value=this.rom_travelstation}}   
+         {{> afQuickField name='travel_date' rows=1 value=this.travel_date}}   
+         {{> afQuickField name='jap_travel_date' rows=1 value=this.jap_travel_date}}      
+         {{> afQuickField name='weather' rows=1 value=this.weather}}
+         {{> afQuickField name='special_feature' rows=1 value=this.special_feature}}
+         {{> afArrayField name='poem_kanji' rows=1 value=this.poem_kanji}}     
+         {{> afArrayField name='poem_romaji' rows=1 value=this.poem_romaji}}
+         {{> afArrayField name='poem_german' rows=1 value=this.poem_german}} 
+         {{> afQuickField name='literary_allusions' rows=1 value=this.literary_allusions}}
+         {{> afQuickField name='createdOn' rows=1 value=this.createdOn type="hidden"}}
+         {{> afQuickField name='userId' rows=1 value=this.userId type="hidden"}} 
+         {{> afQuickField name='latitude' rows=1 value=this.latitude type="hidden"}} 
+         {{> afQuickField name='longitude' rows=1 value=this.latitude type="hidden"}} 
+         {{> afQuickField name='image_id' rows=1 value=this.image_id type="hidden"}}
+      </fieldset>  
+        <button type="submit" class="btn btn-primary">Update</button>
+        {{/autoForm}}
+     {{/with}}  
+</template>
+        
+        
+        
+<template name="insertSpotForm">    
+    
+          {{#autoForm collection="Spots" id="insertSpotForm" type="method"
+             meteormethod = "addSpot"}}
+        <fieldset>
+           <legend> <span class="glyphicon glyphicon-plus"></span> New Spot:</legend>
+            {{> afQuickField name='travelstation' rows=1 value=searchValueSpot}}
+            {{> afQuickField name='jap_travelstation' rows=1 value=""}} 
+            {{> afQuickField name='rom_travelstation' rows=1 value=""}}  
+            {{> afQuickField name='travel_date' rows=1 value=""}}   
+            {{> afQuickField name='jap_travel_date' rows=1 value=""}}      
+            {{> afQuickField name='weather' rows=1 value=""}}
+            {{> afQuickField name='special_feature' rows=1 value=""}}
+            {{> afArrayField name='poem_kanji' rows=1 value=""}}     
+            {{> afArrayField name='poem_romaji' rows=1 value=""}}
+            {{> afArrayField name='poem_german' rows=1 value=""}}
+            {{> afQuickField name='literary_allusions' rows=1 value=""}}
+            {{> afQuickField name='createdOn' rows=1 value="not usable" type="hidden"}}
+            {{> afQuickField name='userId' rows=1 value="not usable" type="hidden"}} 
+            {{> afQuickField name='latitude' rows=1 value=searchValueLatitude type="hidden"}} 
+            {{> afQuickField name='longitude' rows=1 value=searchValueLongitude type="hidden"}} 
+            {{> afQuickField name='image_id' rows=1 value=value_image_id type="hidden"}}
+        </fieldset>
+      <button type="submit" class="btn btn-primary">Submit</button>
+        {{/autoForm}}    
+
+</template>
+
+<template name="expandSpotList">
+      {{#each spots}}
+     <ul>
+      <li><h5>{{expand_spot_address}}  </h5>
+         <p>History: {{spot_history}}  </p>   
+         <p>Characteristics: {{spot_characteristic}}  </p> 
+         <p>other literature: {{other_literature}}  </p>   
+         <p>Poem authors: {{spot_poem_author}}  </p>   
+         <p>Poems (漢字): {{spot_poem_kanji}}  </p>   
+         <p>Poems (Romaji): {{spot_poem_romaji}}  </p>   
+         <p>Translator: {{spot_poem_translator}}  </p>   
+         <p>Poems (German): {{spot_poem_german}}  </p>   
+      </li>
+   </ul>
+   {{/each}}
+</template>
+
+<template name="expandSpotMeta">
+
+    <div class="dropdown">
+          <a href="#" class="dropdown-toggle" 
+                      data-toggle="dropdown" 
+                      role="button" 
+                      aria-haspopup="true" 
+                      aria-expanded="false">
+                     Choose Spot
+            <span class="caret"></span></a>
+          
+          <ul class="dropdown-menu">
+             {{#each spots}}
+            <li><a href="#" class="js-load-wallner">{{travelstation}}</a></li>
+             {{/each}}
+          </ul>
+        </div>
+        
+     {{#with spot}} 
+       <br/> <br/>
+
+     {{#autoForm collection="ExpandSpots" id="insertSpotMeta" type="method" 
+             meteormethod = "addExpandSpotMeta"}}
+       
+     <fieldset>
+         <legend> <span class="glyphicon glyphicon-star"></span> Expand Spot:</legend>
+         {{> afQuickField name='expand_spot_address' rows=1 value=valueExpandSpot}}
+         {{> afQuickField name='spot_history' rows=1 value=""}}  
+         <h3>Literature History:</h3>
+         {{> afQuickField name='spot_characteristic' rows=1 value=""}}    
+         {{> afQuickField name='other_literature' rows=1 value=""}}     
+         <h3>Other poems with/about this spot: </h3>
+         {{> afArrayField name='spot_poem_author' rows=1 value=""}}  
+         {{> afArrayField name='spot_poem_kanji' rows=1 value=""}}     
+         {{> afArrayField name='spot_poem_romaji' rows=1 value=""}}
+         {{> afArrayField name='spot_poem_translator' rows=1 value=""}}  
+         {{> afArrayField name='spot_poem_german' rows=1 value=""}}
+         {{> afQuickField name='createdOn' rows=1 value="not usable" type="hidden"}}
+         {{> afQuickField name='userId' rows=1 value="not usable" type="hidden"}} 
+         {{> afQuickField name='doc_id' rows=1 value=value_doc_id type="hidden"}}
+         {{> afQuickField name='image_id' rows=1 value=value_image_id type="hidden"}}
+      </fieldset>  
+        <button type="submit" class="btn btn-primary">Submit</button>
+        {{/autoForm}}  
+     {{/with}}  
+
+</template>
+
+<template name="mapSearchSpot">
+  <div id="mapSearchSpot" class="map-container">
+    {{> googleMap name="mapSearchSpot" options=mapOptions}}
+  </div>
+</template>
+
+<template name="map">
+  <div class="map-container">
+    {{> googleMap name="map" options=mapOptions}}
+  </div>
+</template>
+
+<template name="drawingTool">
+   <div class="container">
+<!--        <span class="glyphicon glyphicon-save"></span>
+        <span class="glyphicon glyphicon-piggy-bank"></span>
+        <span class="glyphicon glyphicon-triangle-right"></span>
+        <button class="btn btn-success">green</button>
+        <button class="btn btn-primary">blue</button>
+        <button class="btn btn-danger">red</button> <br/>
+        Drawing style:  <br/>  -->
+        
+<!--        <p>Search icon on a styled button:
+  <button type="button" class="btn btn-info">
+    <span class="glyphicon glyphicon-search"></span> Search
+  </button>
+</p>  -->
+<!-- <p>Print icon: <span class="glyphicon glyphicon-print"></span></p> 
+        --> 
+    </div>
+</template>
+
+<template name="spot_add_form">
+<div class="modal fade" id="spot_add_form">
+   <div class="modal-dialog">
+       <div class="modal-content">
+          <div class="modal-header">
+               <div class="modal-title">
+                <h5> Search New Spot </h5>
+               </div>
+          </div>  
+             
+               <div class="modal-body">
+               <form class="js-add-spot">
+                 <input type="text" name="search_spot"/>  Spot (English/ 日本語)
+                 <br/>
+                 <button class="btn" style="BACKGROUND-COLOR: #9d1e18; COLOR: white">search</button>
+               </form>
+               </div>
+               <div class="modal-footer">
+
+               <button class="btn btn-warning" data-dismiss="modal">cancel</button>
+               </div>  
+                    
+       </div>      
+    </div>
+</div>
+</template>
+
+<template name="spotSearchList">
+　　　  <li class="dropdown">
+              <a href="#" class="dropdown-toggle" 
+                      data-toggle="dropdown" 
+                      role="button" 
+                      aria-haspopup="true" 
+                      aria-expanded="false">
+                     Search Spots:
+              <span class="caret"></span></a>
+
+             <ul class="dropdown-menu">
+                {{#each searchSpots}}
+                 <li><a href="" class = "js-load-search-spot">{{formattedAddress}}
+                    <p>{{city}} / {{country}}   </p> </a>
+                 </li>
+                {{/each}}
+            </ul>
+       </li>
+
+</template>

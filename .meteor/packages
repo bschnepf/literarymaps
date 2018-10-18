@@ -1,0 +1,36 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+twbs:bootstrap
+barbatus:stars-rating
+accounts-password
+iron:router
+meteor-base
+mobile-experience
+blaze-html-templates
+session
+jquery
+logging
+reload
+random
+ejson
+spacebars
+check
+ian:accounts-ui-bootstrap-3
+aldeed:autoform
+aldeed:collection2
+babrahams:editable-text
+aldeed:geocoder
+dburles:google-maps
+meteor-platform
+tracker
+ecmascript
+es5-shim
+mongo
+standard-minifiers
+perak:codemirror
+coffeescript
+mizzao:sharejs-codemirror@4.7.0
